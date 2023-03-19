@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" />
+    <title>Draggable div element</title>
+    <style>
+      body {
+        background: whitesmoke;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 200px;
+        width: 200px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 2px 2px darkgrey;
+      }
+    </style>
+  </head>
+  <body>
+    <div>Draggable Element</div>
+    <script>
+      const div = document.getElementsByTagName("div");
+
+      div[0].addEventListener("mousedown", () => {
+        div[0].addEventListener("mousemove", dragDivElem);
+      });
+
+      document.addEventListener("mouseup", () => {
+        div[0].removeEventListener("mousemove", dragDivElem);
+      });
+
+      function dragDivElem(e) {
+        let getStyle = window.getComputedStyle(div[0]);
+
+        let left = parseInt(getStyle.left);
+        let top = parseInt(getStyle.top);
+        div[0].style.top = `${top + e.movementY}px`;
+        div[0].style.left = `${left + e.movementX}px`;
+
+        console.log(e);
+      }
+    </script>
+  </body>
+</html>
